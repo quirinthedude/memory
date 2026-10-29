@@ -3,7 +3,7 @@
     /* Sprache & Zielumgebung */
     "target": "ESNext",                  // moderne Syntax, gut für Browser + Vite
     "lib": ["ESNext", "DOM"],            // Browser-APIs und moderne JS-Funktionen
-
+    "types": ["vite/client"],            // macht import "./styles/style.scss" typisierbar (ab TS 7 Pflicht)
 
     /* Module & Auflösung */
     "module": "ESNext",                  // ES Modules für Vite/Rollup
