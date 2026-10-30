@@ -1,0 +1,124 @@
+@use "../abstracts/_variables" as vars;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+.icon-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.home {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background-color: vars.$home-bg;
+  color: vars.$home-text;
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: min(830px, calc(100% - 48px));
+    transform: translateY(24px);
+  }
+
+  &__subtitle {
+    margin: 0 0 14px;
+    font-size: clamp(22px, 3vw, 38px);
+    font-weight: 400;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: (clamp 48px, 8.7vw, 112px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+  }
+
+  &__play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 16px;
+    margin-top: 72px;
+    padding: 18px 20px;
+    min-height: 83px;
+    border: none;
+    border-radius: 0;
+    background-color: vars.$home-button-bg;
+    color: vars.$home-bg;
+    font: inherit;
+    font-size: 32px;
+    font-weight: 800;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #fff989;
+    }
+
+    &focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 5px;
+    }
+  }
+
+  &__play-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__decoration {
+    position: absolute;
+    bottom: -70px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    color: vars.$home-button-bg;
+    opacity: 0.065;
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+
+  @media (max-width: 700px) {
+    &__content {
+      align-items: center;
+      text-align: center;
+      transform: none;
+    }
+
+    h1 {
+      font-size: clamp(42px, 10vw, 72px);
+      white-space: normal;
+    }
+
+    &__play {
+      margin-top: 48px;
+      font-size: 24px;
+      min-height: 68px;
+    }
+
+    &__decoration {
+      width: 260px;
+      height: 260px;
+    }
+  }
+}

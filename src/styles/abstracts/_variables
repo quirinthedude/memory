@@ -1,0 +1,6 @@
+// HOME – unabhängig vom gewählten Spiel-Theme
+$home-bg: #2d2f2e;
+$home-text: #ffffff;
+$home-button-bg: #f1ed66;
+$home-button-text: #2d2f2e;
+$home-icon-opacity: 0.065;
