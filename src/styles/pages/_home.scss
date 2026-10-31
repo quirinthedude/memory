@@ -61,6 +61,9 @@
     &:hover {
       background-color: t.$home-accent-hover;
       transform: scale(1.05);
+      .home__play-icon {
+        transform: rotate(15deg);
+      }
     }
 
     &:focus-visible {
@@ -72,6 +75,7 @@
   &__play-icon {
     width: 40px;
     height: 40px;
+    transition: transform 0.2 ease;
   }
 
   &__play-arrow {
