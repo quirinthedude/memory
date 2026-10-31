@@ -1,0 +1,35 @@
+// TYPOGRAPHY
+$font-family-base: "Almarai", sans-serif;
+
+$font-regular: 400;
+$font-bold: 700;
+$font-heavy: 800;
+
+// Typografische Rollen
+$type-body: 1rem;
+$type-lead: clamp(1.375rem, 3vw, 2.375rem);
+$type-display: clamp(3rem, 8.7vw, 7rem);
+$type-action-lg: clamp(1.5rem, 2.6vw, 2rem);
+$type-h1: clamp(2.625rem, 10vw, 4.5rem);
+
+// HOME – feste Farbpalette
+$home-bg: #2d2f2e;
+$home-text: #ffffff;
+$home-accent: #f0ea6e;
+$home-accent-text: #303131;
+$home-accent-hover: #fff989;
+
+// SPACING – einheitliche Abstände
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 3rem;
+
+// abstracts/_tokens.scss
+
+$breakpoints: (
+  zero: 0px,
+  phone: 700px,
+  tablet: 1024px,
+  desktop: 1440px,
+);

@@ -1,4 +1,5 @@
+@use "../abstracts/tokens" as t;
 body {
-  font-family: "Almarai", sans-serif;
-  font-weight: 400;
+  font-family: t.$font-family-base;
+  font-weight: t.$font-regular;
 }

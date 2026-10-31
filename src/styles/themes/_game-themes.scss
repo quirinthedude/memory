@@ -1,0 +1,16 @@
+.game {
+  // Standard-Theme: Code Vibes
+  --theme-bg: #303131;
+  --theme-card-back: #27b89d;
+  --theme-card-front: #ffffff;
+  --theme-text: #ffffff;
+
+  &[data-theme="gaming"] {
+    --theme-bg: #215c78;
+    --theme-card-back: #be145e;
+    --theme-card-front: #ffffff;
+    --theme-text: #ffffff;
+  }
+
+  // Weitere Themes folgen
+}
