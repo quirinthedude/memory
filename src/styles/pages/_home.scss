@@ -10,7 +10,7 @@
 
 .home {
   position: relative;
-  @include mx.flex-center;
+  @include mx.flex-center(row);
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
@@ -43,6 +43,7 @@
 
   &__play {
     @include mx.flex-center(row);
+    align-self: center;
     gap: 16px;
     margin-top: 72px;
     padding: 18px 20px;
@@ -55,9 +56,11 @@
     font-size: t.$type-action-lg;
     font-weight: t.$font-bold;
     cursor: pointer;
+    transition: transform 0.2s ease;
 
     &:hover {
       background-color: t.$home-accent-hover;
+      transform: scale(1.05);
     }
 
     &:focus-visible {
@@ -78,13 +81,10 @@
 
   &__decoration {
     position: absolute;
-    bottom: -70px;
-    left: -80px;
+    bottom: 8px;
+    left: -40px;
     width: 400px;
     height: 400px;
-    color: t.$home-accent;
-    opacity: 0.065;
-    transform: rotate(-15deg);
     pointer-events: none;
   }
 

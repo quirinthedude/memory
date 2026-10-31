@@ -13,9 +13,9 @@ $type-action-lg: clamp(1.5rem, 2.6vw, 2rem);
 $type-h1: clamp(2.625rem, 10vw, 4.5rem);
 
 // HOME – feste Farbpalette
-$home-bg: #2d2f2e;
+$home-bg: #303131; // primary background: ;
 $home-text: #ffffff;
-$home-accent: #f0ea6e;
+$home-accent: #f0ea6e; //secondary yellow
 $home-accent-text: #303131;
 $home-accent-hover: #fff989;
 
@@ -25,8 +25,10 @@ $space-md: 1rem;
 $space-lg: 1.5rem;
 $space-xl: 3rem;
 
-// abstracts/_tokens.scss
+// Button
+$button-inactive: #dbdbd6;
 
+// abstracts/_tokens.scss
 $breakpoints: (
   zero: 0px,
   phone: 700px,
