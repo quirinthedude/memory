@@ -1,14 +1,14 @@
 @use "../abstracts/tokens" as t;
 @use "../abstracts/mixins" as mx;
 
-.setings {
+.settings {
   min-height: 100svh;
   padding: clamp(2rem, 6vw, 5rem);
   background: #fff;
   color: t.$home-bg;
 
   &__container {
-    width: min (100%, 1100px);
+    width: min(100%, 1100px);
     margin-inline: auto;
   }
 
