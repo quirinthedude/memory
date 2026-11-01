@@ -5,7 +5,7 @@
   min-height: 100svh;
   padding: clamp(2rem, 6vw, 5rem);
   background: #fff;
-  color: $home-bg;
+  color: t.$home-bg;
 
   &__container {
     width: min (100%, 1100px);
@@ -59,7 +59,7 @@
     }
 
     input[type="radio"] {
-      accent-color: $home-bg;
+      accent-color: t.$home-bg;
       cursor: pointer;
     }
   }
