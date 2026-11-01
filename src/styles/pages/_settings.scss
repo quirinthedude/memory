@@ -1,0 +1,130 @@
+@use "../abstracts/tokens" as t;
+@use "../abstracts/mixins" as mx;
+
+.setings {
+  min-height: 100svh;
+  padding: clamp(2rem, 6vw, 5rem);
+  background: #fff;
+  color: $home-bg;
+
+  &__container {
+    width: min (100%, 1100px);
+    margin-inline: auto;
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+
+    h1 {
+      display: inline-block;
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: t.$font-bold;
+      border-bottom: 4px solid t.$home-accent;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  // left side
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  &__group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    legend {
+      margin-bottom: 0.8rem;
+      font-weight: t.$font-bold;
+      font-size: 1.1rem;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0.5rem 0 0 1rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      accent-color: $home-bg;
+      cursor: pointer;
+    }
+  }
+
+  // right side
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  &__preview {
+    width: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__preview-placeholder {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 1rem;
+    text-align: center;
+    color: #303131;
+    font-weight: t.$font-bold;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f5f5f5;
+    font-size: 0.875rem;
+  }
+
+  &__start {
+    padding: 0.65rem 1rem;
+    border: 0;
+    background: t.$home-accent;
+    color: t.$home-accent-text;
+    font: inherit;
+    font-weight: t.$font-bold;
+    cursor: pointer;
+
+    &:hover {
+      background: t.$home-accent-hover;
+    }
+  }
+
+  @include mx.respond(zero, phone) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__right {
+      max-width: 100%;
+    }
+  }
+}

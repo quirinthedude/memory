@@ -4,6 +4,7 @@ import "@fontsource/almarai/800.css";
 import "@fontsource/red-rose/700.css";
 
 import "./styles/main.scss";
+import { initSettings } from "./ui/settings";
 
 type View = "home" | "settings" | "game";
 
@@ -18,3 +19,14 @@ function showView(view: View): void {
 document
   .querySelector("#start-game")
   ?.addEventListener("click", () => showView("settings"));
+
+initSettings((settings) => {
+  console.log("Game settings:", settings);
+
+  const game = document.querySelector<HTMLElement>("#game");
+
+  if (game) {
+    game.dataset.theme = settings.theme;
+    showView("game");
+  }
+});
