@@ -1,26 +1,40 @@
 @use "../abstracts/tokens" as t;
 @use "../abstracts/mixins" as mx;
+@use "../abstracts/function" as f;
 
 .settings {
+  display: grid;
+  place-items: center;
   min-height: 100svh;
-  padding: clamp(2rem, 6vw, 5rem);
+  padding: 1rem 4rem;
+  margin: auto;
   background: #fff;
   color: t.$home-bg;
 
   &__container {
-    width: min(100%, 1100px);
-    margin-inline: auto;
+    width: 100%;
+    max-width: 1440px;
   }
 
   &__header {
+    @include mx.flex-base;
     margin-bottom: 3rem;
+    height: 67px;
+    width: 251px;
+
+    img {
+      position: relative;
+      top: -8px;
+    }
 
     h1 {
       display: inline-block;
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       font-weight: t.$font-bold;
-      border-bottom: 4px solid t.$home-accent;
+      font-family: t.$font-family-display;
+      padding-left: 20px;
+      // border-bottom: 4px solid t.$home-accent;
     }
   }
 
@@ -47,6 +61,12 @@
       margin-bottom: 0.8rem;
       font-weight: t.$font-bold;
       font-size: 1.1rem;
+
+      img {
+        // position: relative;
+        // top: 8px;
+        vertical-align: middle;
+      }
     }
 
     label {
