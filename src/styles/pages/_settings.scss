@@ -88,13 +88,15 @@
   &__right {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 1.5rem;
     width: 100%;
     max-width: 460px;
   }
 
   &__preview {
-    width: 100%;
+    align-items: flex-end;
+    width: 90%;
 
     img {
       display: block;
@@ -114,24 +116,30 @@
   }
 
   &__actions {
+    width: 100%;
+    height: 64px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    padding: 0.75rem;
+    padding: 0.3rem 0.75rem;
     background: #f5f5f5;
     font-size: 0.875rem;
   }
 
   &__start {
-    padding: 0.65rem 1rem;
+    padding: 0.8rem 1rem;
     border: 0;
     background: t.$home-accent;
     color: t.$home-accent-text;
     font: inherit;
     font-weight: t.$font-bold;
     cursor: pointer;
+
+    img {
+      vertical-align: middle;
+    }
 
     &:hover {
       background: t.$home-accent-hover;
