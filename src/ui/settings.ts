@@ -2,6 +2,8 @@ import codeVibes from "../assets/images/previews/code_vibes.svg?url";
 import gaming from "../assets/images/previews/games.svg?url";
 import daProjects from "../assets/images/previews/da_projects.svg?url";
 import foods from "../assets/images/previews/foods.svg?url";
+import line2 from "../assets/icons/line2.svg?url";
+import line4 from "../assets/icons/line4.svg?url";
 
 export type Theme = "code-vibes" | "gaming" | "da-projects" | "foods";
 export type BoardSize = "small" | "medium" | "large";
@@ -67,9 +69,12 @@ export function initSettings(onStart: (settings: GameSettings) => void): void {
     const input = event.target;
 
     if (!(input instanceof HTMLInputElement)) return;
-    if (input.name !== "theme") return;
 
-    updatePreview(input.value as Theme);
+    if (input.type !== "radio") return;
+    if (input.name === "theme") {
+      updatePreview(input.value as Theme);
+    }
+    updateSettingsProgress(form);
   });
 
   // start of game
@@ -86,4 +91,48 @@ export function initSettings(onStart: (settings: GameSettings) => void): void {
   if (initialTheme) {
     updatePreview(initialTheme.value as Theme);
   }
+  updateSettingsProgress(form);
+}
+
+/**
+ * Updates the selection summary, progress arrows
+ * and availibity of start button;
+ * @param form - settings-form
+ */
+function updateSettingsProgress(form: HTMLFormElement): void {
+  const theme = form.querySelector<HTMLInputElement>(
+    'input[name="theme"]:checked',
+  );
+  const player = form.querySelector<HTMLInputElement>(
+    'input[name="players"]:checked',
+  );
+  const board = form.querySelector<HTMLInputElement>(
+    'input[name="board-size"]:checked',
+  );
+
+  const themeArrow = document.querySelector<HTMLImageElement>("#theme");
+  const playerArrow = document.querySelector<HTMLImageElement>("#player");
+  const startButton =
+    document.querySelector<HTMLButtonElement>("#start-memory-game");
+
+  if (themeArrow) themeArrow.src = theme ? line4 : line2;
+  if (playerArrow) playerArrow.src = player ? line4 : line2;
+
+  if (startButton) {
+    startButton.disabled = !(theme && player && board);
+  }
+
+  const selection = [
+    { input: theme, id: "#theme-summary", fallback: "Game theme" },
+    { input: player, id: "#player-summary", fallback: "Player" },
+    { input: board, id: "#board-summary", fallback: "Board size" },
+  ];
+
+  selection.forEach(({ input, id, fallback }) => {
+    const element = document.querySelector<HTMLElement>(id);
+    if (!element) return;
+
+    element.textContent =
+      input?.closest("label")?.textContent?.trim() || fallback;
+  });
 }

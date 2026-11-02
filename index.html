@@ -56,7 +56,7 @@
                 </legend>
 
                 <label>
-                  <input type="radio" name="theme" value="code-vibes" checked />
+                  <input type="radio" name="theme" value="code-vibes" />
                   Code Vibes
                 </label>
 
@@ -84,7 +84,7 @@
                 </legend>
 
                 <label>
-                  <input type="radio" name="players" value="1" checked />
+                  <input type="radio" name="players" value="1" />
                   One
                 </label>
 
@@ -101,7 +101,7 @@
                 </legend>
 
                 <label>
-                  <input type="radio" name="board-size" value="small" checked />
+                  <input type="radio" name="board-size" value="small" />
                   Small
                 </label>
 
@@ -119,7 +119,6 @@
 
             <!-- right side -->
             <div class="settings__right">
-              <!-- Einziger dynamischer Bereich -->
               <div
                 id="theme-preview"
                 class="settings__preview"
@@ -129,19 +128,19 @@
                 <img src="./src/assets/images/previews/code_vibes.svg" alt="" />
               </div>
 
-              <!-- Untere Aktionsleiste -->
               <div class="settings__actions">
-                <span>Game theme</span>
-                <img src="./src/assets/icons/line2.svg" alt="" />
-                <span>Player</span>
-                <img src="./src/assets/icons/line2.svg" alt="" />
-                <span>Board size</span>
+                <span id="theme-summary">Game theme</span>
+                <img id="theme" src="./src/assets/icons/line2.svg" alt="" />
+                <span id="player-summary">Player</span>
+                <img id="player" src="./src/assets/icons/line2.svg" alt="" />
+                <span id="board-summary">Board size</span>
 
                 <button
                   id="start-memory-game"
                   type="submit"
                   form="game-settings"
                   class="settings__start"
+                  disabled
                 >
                   <img src="./src/assets/icons/start.svg" alt="" />
                   Start
@@ -152,9 +151,7 @@
         </div>
       </section>
 
-      <section id="game" class="game" hidden>
-        <!-- Später das Spielfeld -->
-      </section>
+      <section id="game" class="game" hidden></section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
