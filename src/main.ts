@@ -4,7 +4,9 @@ import "@fontsource/almarai/800.css";
 import "@fontsource/red-rose/700.css";
 
 import "./styles/main.scss";
-import { initSettings } from "./ui/settings";
+
+import { initSettings, type GameSettings } from "./ui/settings";
+import { GameHeader } from "./ui/game-header";
 
 type View = "home" | "settings" | "game";
 
@@ -30,3 +32,28 @@ initSettings((settings) => {
     showView("game");
   }
 });
+
+function startGame(settings: GameSettings): void {
+  const game = document.querySelector<HTMLElement>("#game");
+  if (!game) return;
+
+  game.dataset.theme = settings.theme;
+
+  const container = game.querySelector<HTMLElement>("#game-header");
+  if (!container) return;
+
+  //initialize header
+  const header = new GameHeader(container, settings.theme, () =>
+    showView("home"),
+  );
+
+  // beginning oft state
+  header.update({
+    scores: { blue: 0, orange: 0 },
+    currentPlayer: "blue",
+  });
+  showView("game");
+}
+
+// use existing callback
+initSettings(startGame);
