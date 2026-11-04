@@ -5,8 +5,10 @@ import foods from "../assets/images/previews/foods.svg?url";
 import line2 from "../assets/icons/line2.svg?url";
 import line4 from "../assets/icons/line4.svg?url";
 
+import type { BoardSize } from "../game/types";
+
 export type Theme = "code-vibes" | "gaming" | "da-projects" | "foods";
-export type BoardSize = "small" | "medium" | "large";
+// export type BoardSize = "small" | "medium" | "large";
 
 /**
  * configuration

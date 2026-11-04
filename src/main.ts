@@ -7,6 +7,7 @@ import "./styles/main.scss";
 
 import { initSettings, type GameSettings } from "./ui/settings";
 import { GameHeader } from "./ui/game-header";
+import { renderGameBoard } from "./game/game";
 
 type View = "home" | "settings" | "game";
 
@@ -21,17 +22,6 @@ function showView(view: View): void {
 document
   .querySelector("#start-game")
   ?.addEventListener("click", () => showView("settings"));
-
-initSettings((settings) => {
-  console.log("Game settings:", settings);
-
-  const game = document.querySelector<HTMLElement>("#game");
-
-  if (game) {
-    game.dataset.theme = settings.theme;
-    showView("game");
-  }
-});
 
 function startGame(settings: GameSettings): void {
   const game = document.querySelector<HTMLElement>("#game");
@@ -52,6 +42,10 @@ function startGame(settings: GameSettings): void {
     scores: { blue: 0, orange: 0 },
     currentPlayer: "blue",
   });
+
+  // Initialize board
+  renderGameBoard(settings);
+
   showView("game");
 }
 
