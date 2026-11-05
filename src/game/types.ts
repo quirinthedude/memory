@@ -10,3 +10,11 @@ export const BOARD_SIZES: Record<BoardSize, BoardConfig> = {
   medium: { rows: 6, columns: 4 },
   large: { rows: 6, columns: 6 },
 };
+
+export interface MemoryCard {
+  id: number;
+  pairId: number;
+  image: string;
+  isFlipped: boolean;
+  isMatched: boolean;
+}

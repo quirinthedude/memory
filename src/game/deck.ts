@@ -1,3 +1,5 @@
+import type { MemoryCard } from "./types";
+
 export function createShuffleDeck(pairCount: number): number[] {
   const cards: number[] = [];
 
@@ -16,4 +18,16 @@ export function createShuffleDeck(pairCount: number): number[] {
   }
 
   return cards;
+}
+
+export function mapDeckToCards(deck: number[]): MemoryCard[] {
+  return deck.map(
+    (pairId, index): MemoryCard => ({
+      id: index,
+      pairId: pairId,
+      image: "",
+      isFlipped: false,
+      isMatched: false,
+    }),
+  );
 }
