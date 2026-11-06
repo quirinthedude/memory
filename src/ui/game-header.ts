@@ -1,4 +1,4 @@
-export type PlayerId = "blue" | "orange";
+import type { PlayerId } from "../game/types";
 
 export interface GameHeaderState {
   scores: Record<PlayerId, number>;

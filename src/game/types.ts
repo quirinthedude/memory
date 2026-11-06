@@ -18,3 +18,13 @@ export interface MemoryCard {
   isFlipped: boolean;
   isMatched: boolean;
 }
+
+export type PlayerId = "blue" | "orange";
+
+export interface GameState {
+  cards: MemoryCard[];
+  currentPlayer: "blue" | "orange";
+  scores: Record<"blue" | "orange", number>;
+  flippedCards: number[];
+  isLocked: boolean;
+}
