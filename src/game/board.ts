@@ -1,11 +1,10 @@
-import type { BoardConfig } from "./types";
-import { createShuffleDeck, mapDeckToCards } from "./deck";
+import type { BoardConfig, MemoryCard } from "./types";
 
-export function renderBoard(container: HTMLElement, config: BoardConfig): void {
-  const totalCards = config.rows * config.columns;
-  const deck = createShuffleDeck(totalCards / 2);
-  const cards = mapDeckToCards(deck);
-
+export function renderBoard(
+  container: HTMLElement,
+  config: BoardConfig,
+  cards: MemoryCard[],
+): void {
   container.replaceChildren();
   container.classList.add("game-board");
 

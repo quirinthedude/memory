@@ -7,7 +7,7 @@ import "./styles/main.scss";
 
 import { initSettings, type GameSettings } from "./ui/settings";
 import { GameHeader } from "./ui/game-header";
-import { renderGameBoard } from "./game/game";
+import { initializeGame } from "./game/game";
 
 type View = "home" | "settings" | "game";
 
@@ -27,10 +27,13 @@ function startGame(settings: GameSettings): void {
   const game = document.querySelector<HTMLElement>("#game");
   if (!game) return;
 
-  game.dataset.theme = settings.theme;
-
   const container = game.querySelector<HTMLElement>("#game-header");
   if (!container) return;
+
+  const state = initializeGame(settings);
+  if (!state) return;
+
+  game.dataset.theme = settings.theme;
 
   //initialize header
   const header = new GameHeader(container, settings.theme, () =>
@@ -38,13 +41,7 @@ function startGame(settings: GameSettings): void {
   );
 
   // beginning oft state
-  header.update({
-    scores: { blue: 0, orange: 0 },
-    currentPlayer: "blue",
-  });
-
-  // Initialize board
-  renderGameBoard(settings);
+  header.update(state);
 
   showView("game");
 }
