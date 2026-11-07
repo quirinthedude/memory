@@ -2,6 +2,7 @@ import type { GameSettings } from "../ui/settings";
 import { BOARD_SIZES, type GameState } from "./types";
 import { createShuffleDeck, mapDeckToCards } from "./deck";
 import { renderBoard } from "./board";
+import { getThemeConfig } from "../data/theme-config";
 
 let gameState: GameState | null = null;
 
@@ -10,13 +11,14 @@ export function initializeGame(settings: GameSettings): GameState | null {
   if (!board) return null;
 
   const config = BOARD_SIZES[settings.boardSize];
+  const themeConfig = getThemeConfig(settings.theme);
 
   board.dataset.size = settings.boardSize;
 
   const deck = createShuffleDeck((config.rows * config.columns) / 2);
 
   gameState = {
-    cards: mapDeckToCards(deck),
+    cards: mapDeckToCards(deck, themeConfig.cardFaces),
     currentPlayer: "blue",
     scores: { blue: 0, orange: 0 },
     flippedCards: [],

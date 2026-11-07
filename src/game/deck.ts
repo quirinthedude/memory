@@ -20,12 +20,15 @@ export function createShuffleDeck(pairCount: number): number[] {
   return cards;
 }
 
-export function mapDeckToCards(deck: number[]): MemoryCard[] {
+export function mapDeckToCards(
+  deck: number[],
+  cardFaces: readonly string[],
+): MemoryCard[] {
   return deck.map(
     (pairId, index): MemoryCard => ({
       id: index,
-      pairId: pairId,
-      image: "",
+      pairId,
+      image: cardFaces[pairId],
       isFlipped: false,
       isMatched: false,
     }),

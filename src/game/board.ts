@@ -19,8 +19,13 @@ export function renderBoard(
     card.dataset.index = String(memoryCard.id);
     card.dataset.pairId = String(memoryCard.pairId);
 
-    // Temporary visualization for testing
-    card.textContent = String(memoryCard.pairId);
+    const image = document.createElement("img");
+
+    image.src = memoryCard.image;
+    image.alt = "";
+    image.draggable = false;
+
+    card.appendChild(image);
 
     container.appendChild(card);
   }

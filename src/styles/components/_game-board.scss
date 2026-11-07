@@ -31,6 +31,13 @@
       padding: 0;
       border: 0;
       cursor: pointer;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
 
     &[data-size="small"] {
