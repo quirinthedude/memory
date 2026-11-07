@@ -18,14 +18,12 @@
   }
 
   &-board {
-    --card-size: 120px;
-
     display: grid;
-    grid-template-columns: repeat(var(--columns), var(--card-size));
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 
     gap: f.pixel-to-rem(6);
-    max-width: t.$maxsize;
-    width: max-content;
+    width: calc(100% - #{f.pixel-to-rem(32)});
+    max-width: f.pixel-to-rem(750);
     margin: f.pixel-to-rem(54) auto 0;
 
     &__card {
@@ -37,6 +35,16 @@
 
     &[data-size="small"] {
       gap: f.pixel-to-rem(16);
+      max-width: f.pixel-to-rem(528);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .game-board {
+      --side-gap: clamp(#{f.pixel-to-rem(8)}, 3vw, #{f.pixel-to-rem(16)});
+      width: calc(100% - var(--side-gap) - var(--side-gap));
+      // grid-template-columns: repeat(4, minmax(0, 1fr));
+      // enventuelles Todo: Kartengrösse anhand der tasächlichen Bildschirmgrösse berechnen, zwecks optimum
     }
   }
 }
