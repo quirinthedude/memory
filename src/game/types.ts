@@ -7,7 +7,7 @@ export interface BoardConfig {
 
 export const BOARD_SIZES: Record<BoardSize, BoardConfig> = {
   small: { rows: 4, columns: 4 },
-  medium: { rows: 6, columns: 4 },
+  medium: { rows: 4, columns: 6 },
   large: { rows: 6, columns: 6 },
 };
 

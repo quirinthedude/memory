@@ -33,4 +33,5 @@ export function renderGameBoard(settings: GameSettings): void {
 
   //   const cardCount = sizeMap[settings.boardSize];
   const config = BOARD_SIZES[settings.boardSize];
+  board.dataset.size = settings.boardSize;
 }

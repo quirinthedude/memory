@@ -29,10 +29,12 @@ $space-xl: 3rem;
 // Button
 $button-inactive: #dbdbd6;
 
-// abstracts/_tokens.scss
+// responisveness
 $breakpoints: (
   zero: 0px,
   phone: 700px,
   tablet: 1024px,
   desktop: 1440px,
 );
+
+$maxsize: 1440px;
