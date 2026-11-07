@@ -25,7 +25,7 @@ export function initializeGame(settings: GameSettings): GameState | null {
     isLocked: false,
   };
 
-  renderBoard(board, config, gameState.cards);
+  renderBoard(board, config, gameState.cards, themeConfig.cardBack);
 
   return gameState;
 }
