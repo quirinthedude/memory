@@ -1,5 +1,5 @@
 @use "../abstracts/function" as f;
-@use "../abstracts/tokens" as t;
+@use "../abstracts/mixins" as mx;
 .game {
   &--gaming {
     background: #294f60;
@@ -38,13 +38,16 @@
       max-width: f.pixel-to-rem(528);
     }
   }
-
-  @media (max-width: 700px) {
+  @include mx.respond(zero, phone) {
     .game-board {
       --side-gap: clamp(#{f.pixel-to-rem(8)}, 3vw, #{f.pixel-to-rem(16)});
       width: calc(100% - var(--side-gap) - var(--side-gap));
-      // grid-template-columns: repeat(4, minmax(0, 1fr));
-      // enventuelles Todo: Kartengrösse anhand der tasächlichen Bildschirmgrösse berechnen, zwecks optimum
+    }
+  }
+
+  @include mx.respond(zero, phone-small) {
+    .game-board {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 }
