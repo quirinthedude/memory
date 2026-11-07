@@ -11,6 +11,8 @@ export function initializeGame(settings: GameSettings): GameState | null {
 
   const config = BOARD_SIZES[settings.boardSize];
 
+  board.dataset.size = settings.boardSize;
+
   const deck = createShuffleDeck((config.rows * config.columns) / 2);
 
   gameState = {
@@ -33,5 +35,4 @@ export function renderGameBoard(settings: GameSettings): void {
 
   //   const cardCount = sizeMap[settings.boardSize];
   const config = BOARD_SIZES[settings.boardSize];
-  board.dataset.size = settings.boardSize;
 }
