@@ -24,7 +24,7 @@ export function renderBoard(
     inner.classList.add("game-board__inner");
 
     const back = document.createElement("img");
-    back.classList.add("game-board__face", "game-board__face-back");
+    back.classList.add("game-board__face", "game-board__face--back");
     back.src = cardBack;
     back.alt = "";
     back.draggable = false;
