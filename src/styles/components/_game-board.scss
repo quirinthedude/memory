@@ -44,6 +44,27 @@
       gap: f.pixel-to-rem(16);
       max-width: f.pixel-to-rem(528);
     }
+
+    &__inner {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    &__face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      backface-visibility: hidden;
+
+      &--front {
+        transform: rotateY(180deg);
+      }
+    }
   }
   @include mx.respond(zero, phone) {
     .game-board {
