@@ -27,6 +27,25 @@ export function initializeGame(settings: GameSettings): GameState | null {
 
   renderBoard(board, config, gameState.cards, themeConfig.cardBack);
 
+  board.onclick = (event) => {
+    const target = event.target;
+
+    if (!(target instanceof Element)) return;
+
+    const card = target.closest<HTMLButtonElement>(".game-board__card");
+
+    if (!card || !board.contains(card)) return;
+
+    const index = Number(card.dataset.index);
+    const memoryCard = gameState?.cards[index];
+
+    if (!memoryCard) return;
+
+    memoryCard.isFlipped = !memoryCard.isFlipped;
+
+    card.classList.toggle("is-flipped", memoryCard.isFlipped);
+  };
+
   return gameState;
 }
 
