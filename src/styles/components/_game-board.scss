@@ -43,7 +43,7 @@
     }
 
     &__card.is-flipped &__inner {
-      transform: rotateY(180deg);
+      transform: rotateX(180deg);
     }
 
     &[data-size="small"] {
@@ -69,7 +69,7 @@
       backface-visibility: hidden;
 
       &--front {
-        transform: rotateY(180deg);
+        transform: rotateX(180deg);
       }
     }
   }
