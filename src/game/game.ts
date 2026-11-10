@@ -6,7 +6,10 @@ import { getThemeConfig } from "../data/theme-config";
 
 let gameState: GameState | null = null;
 
-export function initializeGame(settings: GameSettings): GameState | null {
+export function initializeGame(
+  settings: GameSettings,
+  onStateChange: (state: GameState) => void,
+): GameState | null {
   const board = document.querySelector<HTMLElement>("#game-board");
   if (!board) return null;
 
@@ -68,6 +71,9 @@ export function initializeGame(settings: GameSettings): GameState | null {
       firstCard.isMatched = true;
       secondCard.isMatched = true;
 
+      state.scores[state.currentPlayer]++;
+      onStateChange(state);
+
       state.flippedCards = [];
       state.isLocked = false;
       return;
@@ -87,27 +93,17 @@ export function initializeGame(settings: GameSettings): GameState | null {
       }
 
       state.flippedCards = [];
+
+      if (settings.players === 2) {
+        state.currentPlayer =
+          state.currentPlayer === "blue" ? "orange" : "blue";
+
+        onStateChange(state);
+      }
+
       state.isLocked = false;
     }, 1000);
   };
-  // board.onclick = (event) => {
-  //   const target = event.target;
-
-  //   if (!(target instanceof Element)) return;
-
-  //   const card = target.closest<HTMLButtonElement>(".game-board__card");
-
-  //   if (!card || !board.contains(card)) return;
-
-  //   const index = Number(card.dataset.index);
-  //   const memoryCard = gameState?.cards[index];
-
-  //   if (!memoryCard) return;
-
-  //   memoryCard.isFlipped = !memoryCard.isFlipped;
-
-  //   card.classList.toggle("is-flipped", memoryCard.isFlipped);
-  // };
 
   return gameState;
 }

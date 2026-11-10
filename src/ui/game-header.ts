@@ -53,5 +53,6 @@ export class GameHeader {
     )!;
 
     active.dataset.player = state.currentPlayer;
+    active.textContent = state.currentPlayer === "blue" ? "Blue" : "Orange";
   }
 }

@@ -9,6 +9,8 @@ import { initSettings, type GameSettings } from "./ui/settings";
 import { GameHeader } from "./ui/game-header";
 import { initializeGame } from "./game/game";
 
+let header: GameHeader | null = null;
+
 type View = "home" | "settings" | "game";
 
 function showView(view: View): void {
@@ -30,7 +32,9 @@ function startGame(settings: GameSettings): void {
   const container = game.querySelector<HTMLElement>("#game-header");
   if (!container) return;
 
-  const state = initializeGame(settings);
+  const state = initializeGame(settings, (state) => {
+    header?.update(state);
+  });
   if (!state) return;
 
   game.dataset.theme = settings.theme;
