@@ -27,24 +27,87 @@ export function initializeGame(settings: GameSettings): GameState | null {
 
   renderBoard(board, config, gameState.cards, themeConfig.cardBack);
 
+  const state = gameState;
+
   board.onclick = (event) => {
     const target = event.target;
-
     if (!(target instanceof Element)) return;
 
     const card = target.closest<HTMLButtonElement>(".game-board__card");
-
     if (!card || !board.contains(card)) return;
 
     const index = Number(card.dataset.index);
-    const memoryCard = gameState?.cards[index];
+    const memoryCard = state.cards[index];
 
-    if (!memoryCard) return;
+    //prevent invalid interactions
+    if (
+      !memoryCard ||
+      state.isLocked ||
+      memoryCard.isFlipped ||
+      memoryCard.isMatched
+    )
+      return;
 
-    memoryCard.isFlipped = !memoryCard.isFlipped;
+    //flip selected card
+    memoryCard.isFlipped = true;
+    card.classList.add("is-flipped");
+    card.setAttribute("aria-label", `Card ${index + 1}, face up`);
 
-    card.classList.toggle("is-flipped", memoryCard.isFlipped);
+    state.flippedCards.push(index);
+
+    //Wait for second card
+    if (state.flippedCards.length < 2) return;
+
+    state.isLocked = true;
+
+    const [firstIndex, secondIndex] = state.flippedCards;
+    const firstCard = state.cards[firstIndex];
+    const secondCard = state.cards[secondIndex];
+
+    if (firstCard.pairId === secondCard.pairId) {
+      firstCard.isMatched = true;
+      secondCard.isMatched = true;
+
+      state.flippedCards = [];
+      state.isLocked = false;
+      return;
+    }
+
+    //different pair -> back to game
+    setTimeout(() => {
+      firstCard.isFlipped = false;
+      secondCard.isFlipped = false;
+
+      for (const cardIndex of [firstIndex, secondIndex]) {
+        const element = board.querySelector<HTMLButtonElement>(
+          `.game-board__card[data-index="${cardIndex}"]`,
+        );
+        element?.classList.remove("is-flipped");
+        element?.setAttribute("aria-label", `Card ${cardIndex + 1}, face down`);
+      }
+
+      state.flippedCards = [];
+      state.isLocked = false;
+    }, 1000);
   };
+  // board.onclick = (event) => {
+  //   const target = event.target;
+
+  //   if (!(target instanceof Element)) return;
+
+  //   const card = target.closest<HTMLButtonElement>(".game-board__card");
+
+  //   if (!card || !board.contains(card)) return;
+
+  //   const index = Number(card.dataset.index);
+  //   const memoryCard = gameState?.cards[index];
+
+  //   if (!memoryCard) return;
+
+  //   memoryCard.isFlipped = !memoryCard.isFlipped;
+
+  //   card.classList.toggle("is-flipped", memoryCard.isFlipped);
+  // };
 
   return gameState;
 }
