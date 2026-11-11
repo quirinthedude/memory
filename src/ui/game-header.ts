@@ -25,7 +25,12 @@ export class GameHeader {
 
         <div class="game-header__current">
           Current player:
-          <span class="game-header__active" data-player="blue">♙</span>
+          <span
+            class="game-header__active"
+            data-player="blue"
+            role="img"
+            aria-label="Blue"
+          ></span>
         </div>
 
         <button class="game-header__exit" type="button">
@@ -53,6 +58,6 @@ export class GameHeader {
     )!;
 
     active.dataset.player = state.currentPlayer;
-    active.textContent = state.currentPlayer === "blue" ? "Blue" : "Orange";
+    active.setAttribute("aria-label", state.currentPlayer);
   }
 }
