@@ -1,3 +1,5 @@
+@use "../abstracts/tokens" as t;
+
 .game-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -7,9 +9,9 @@
   width: min(85%, 1220px);
   margin: 40px auto 0;
   padding: 1rem 1.5rem;
-
   border-radius: 10px;
 
+  // SCORES
   &__scores {
     display: flex;
     gap: 1rem;
@@ -26,10 +28,11 @@
     gap: 0.25rem;
 
     &--blue {
-      color: #0788c9;
+      color: t.$player-blue;
     }
+
     &--orange {
-      color: #ef7600;
+      color: t.$player-orange;
     }
   }
 
@@ -37,6 +40,7 @@
     display: none;
   }
 
+  // CURRENT PLAYER
   &__current {
     display: flex;
     align-items: center;
@@ -44,23 +48,39 @@
   }
 
   &__active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     padding: 0.2rem 0.4rem;
-    background: #0788c9;
-    color: white;
     border-radius: 5px;
+    background: t.$player-blue;
+    color: white;
+
+    &[data-player="orange"] {
+      background: t.$player-orange;
+    }
   }
 
+  // EXIT
   &__exit {
     justify-self: end;
     cursor: pointer;
   }
 
+  // THEMES
   &[data-theme="gaming"] {
     background: #555e78;
     color: white;
+
+    .game-header__active {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.375rem;
+    }
   }
 
-  &[data-theme="da_projects"] {
+  &[data-theme="da-projects"] {
     background: #eef1f3;
     color: #217b98;
   }
@@ -70,7 +90,7 @@
     color: #aa5415;
   }
 
-  &[data-theme="code_vibes"] {
+  &[data-theme="code-vibes"] {
     background: transparent;
     color: white;
 
