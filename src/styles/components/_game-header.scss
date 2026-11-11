@@ -27,12 +27,31 @@
     align-items: center;
     gap: 0.25rem;
 
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 0.75rem;
+      height: 1rem;
+      flex-shrink: 0;
+
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
     &--blue {
       color: t.$player-blue;
+
+      &::before {
+        background-image: url("../../assets/icons/blue.svg");
+      }
     }
 
     &--orange {
       color: t.$player-orange;
+      &::before {
+        background-image: url("../../assets/icons/orange.svg");
+      }
     }
   }
 
@@ -52,10 +71,19 @@
     align-items: center;
     justify-content: center;
 
-    padding: 0.2rem 0.4rem;
-    border-radius: 5px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 0.375rem;
     background: t.$player-blue;
-    color: white;
+
+    &::before {
+      content: "";
+      width: 0.75rem;
+      height: 1rem;
+      background: url(../../assets/icons/current_player.svg) center / contain
+        no-repeat;
+    }
 
     &[data-player="orange"] {
       background: t.$player-orange;
@@ -104,6 +132,19 @@
 
     .game-header__score--blue {
       order: -1;
+    }
+
+    .game-header__active {
+      width: 1.25rem;
+      height: 1rem;
+      border-radius: 0;
+
+      mask: url("../../assets/icons/blue_current.svg") center / contain
+        no-repeat;
+
+      &::before {
+        content: none;
+      }
     }
   }
 }
