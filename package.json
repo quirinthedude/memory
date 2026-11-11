@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fontsource/almarai": "^5.3.0",
+    "@fontsource/orbitron": "^5.3.0",
     "@fontsource/red-rose": "^5.3.0"
   }
 }

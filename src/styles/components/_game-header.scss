@@ -115,10 +115,26 @@
   &[data-theme="gaming"] {
     background: #555e78;
     color: white;
+    font-family: t.$font-family-gaming;
+    font-weight: t.$font-bold;
+    line-height: 1;
 
     .game-header {
       &__exit::before {
         background-image: url("../../assets/icons/exit_red.svg");
+      }
+      &__score {
+        font-size: 1.875rem; // 30px
+      }
+
+      &__current {
+        font-size: 2rem; // 32px
+        letter-spacing: 0.07em;
+      }
+
+      &__exit {
+        font-size: 1.25rem; // 20px
+        letter-spacing: 0.04em;
       }
     }
   }
