@@ -92,8 +92,23 @@
 
   // EXIT
   &__exit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
     justify-self: end;
     cursor: pointer;
+
+    &::before {
+      content: "";
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
 
   // THEMES
@@ -101,49 +116,62 @@
     background: #555e78;
     color: white;
 
-    .game-header__active {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 0.375rem;
+    .game-header {
+      &__exit::before {
+        background-image: url("../../assets/icons/exit_red.svg");
+      }
     }
   }
 
   &[data-theme="da-projects"] {
     background: #eef1f3;
     color: #217b98;
+
+    .game-header__exit::before {
+      background-image: url("../../assets/icons/exit_blue.svg");
+    }
   }
 
   &[data-theme="foods"] {
     background: #efe3d7;
     color: #aa5415;
+
+    .game-header__exit::before {
+      background-image: url("../../assets/icons/exit_orange.svg");
+    }
   }
 
   &[data-theme="code-vibes"] {
     background: transparent;
     color: white;
 
-    .game-header__scores {
-      background: #3d5350;
-    }
+    .game-header {
+      &__scores {
+        background: #3d5350;
+      }
 
-    .game-header__label {
-      display: inline;
-    }
+      &__label {
+        display: inline;
+      }
 
-    .game-header__score--blue {
-      order: -1;
-    }
+      &__score--blue {
+        order: -1;
+      }
 
-    .game-header__active {
-      width: 1.25rem;
-      height: 1rem;
-      border-radius: 0;
+      &__active {
+        width: 1.25rem;
+        height: 1rem;
+        border-radius: 0;
 
-      mask: url("../../assets/icons/blue_current.svg") center / contain
-        no-repeat;
+        mask: url("../../assets/icons/blue_current.svg") center / contain
+          no-repeat;
 
-      &::before {
-        content: none;
+        &::before {
+          content: none;
+        }
+      }
+      &__exit::before {
+        background-image: url("../../assets/icons/exit_white.svg");
       }
     }
   }
