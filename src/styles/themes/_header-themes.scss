@@ -46,9 +46,45 @@
   &[data-theme="da-projects"] {
     background: #eef1f3;
     color: #217b98;
+    font-family: t.$font-family-da-projects;
+    font-weight: t.$font-bold;
+    line-height: 1;
 
-    .game-header__exit::before {
-      background-image: url("../../assets/icons/exit_blue.svg");
+    .game-header__score {
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+
+    .game-header__current {
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    .game-header__exit {
+      font-family: t.$font-family-da-projects;
+      font-size: 20px;
+      font-weight: t.$font-bold;
+      line-height: 1;
+      letter-spacing: 0;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 10px;
+      background: #bfe5f2;
+      color: #1e7594;
+      box-shadow: 0 3px 6px rgb(0 0 0 / 15%); // Visuelle Annäherung an die PDF.
+
+      &:hover {
+        background: #1e7594;
+        color: white;
+
+        &::before {
+          background-image: url("../../assets/icons/exit_white.svg");
+        }
+      }
+
+      &::before {
+        background-image: url("../../assets/icons/exit_blue.svg");
+      }
     }
   }
 
