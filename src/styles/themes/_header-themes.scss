@@ -100,9 +100,21 @@
   &[data-theme="code-vibes"] {
     background: transparent;
     color: white;
+    font-family: t.$font-family-display;
+    font-weight: t.$font-bold;
+    line-height: 1;
+
+    .game-header__score,
+    .game-header__current,
+    .game-header__exit {
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
 
     .game-header {
       &__scores {
+        // Figma PDF and preview SVG disagree on the original surface fill.
         background: #3d5350;
       }
 
@@ -114,13 +126,34 @@
         order: -1;
       }
 
+      &__score::before {
+        width: 1.5rem;
+        height: 1.25rem;
+        background: currentColor;
+        mask: url("../../assets/icons/blue_current.svg") center / contain
+          no-repeat;
+      }
+
+      &__current {
+        gap: 0.5rem;
+      }
+
       &__active {
-        width: 1.25rem;
-        height: 1rem;
+        width: 1.5rem;
+        height: 1.25rem;
         border-radius: 0;
+        background-color: t.$player-blue;
 
         mask: url("../../assets/icons/blue_current.svg") center / contain
           no-repeat;
+
+        &[data-player="blue"] {
+          background-color: t.$player-blue;
+        }
+
+        &[data-player="orange"] {
+          background-color: t.$player-orange;
+        }
 
         &::before {
           content: none;
