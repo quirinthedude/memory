@@ -4,6 +4,8 @@ import "@fontsource/almarai/800.css";
 import "@fontsource/red-rose/700.css";
 import "@fontsource/orbitron/700.css";
 import "@fontsource/figtree/700.css";
+import "@fontsource/delius-unicase/700.css";
+import "@fontsource/klee-one/600.css";
 
 import "./styles/main.scss";
 

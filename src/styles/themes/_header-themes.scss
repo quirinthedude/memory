@@ -92,6 +92,44 @@
     background: #efe3d7;
     color: #aa5415;
 
+    .game-header__scores {
+      gap: 32px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: white;
+    }
+
+    .game-header__score {
+      font-family: t.$font-family-delius-unicase;
+      font-weight: t.$font-bold;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .game-header__current {
+      font-family: t.$font-family-klee-one;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: 0;
+      gap: 24px;
+    }
+
+    .game-header__active {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .game-header__exit {
+      font-family: t.$font-family-delius-unicase;
+      font-weight: t.$font-bold;
+      font-size: 16px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
     .game-header__exit::before {
       background-image: url("../../assets/icons/exit_orange.svg");
     }
@@ -123,6 +161,7 @@
       background: rgba(134, 233, 214, 0.14);
       color: white;
       box-shadow: none;
+      white-space: nowrap;
 
       &:hover {
         border-width: 3px;

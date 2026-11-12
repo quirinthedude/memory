@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "@fontsource/almarai": "^5.3.0",
+    "@fontsource/delius-unicase": "^5.3.0",
     "@fontsource/figtree": "^5.3.0",
+    "@fontsource/klee-one": "^5.3.1",
     "@fontsource/orbitron": "^5.3.0",
     "@fontsource/red-rose": "^5.3.0"
   }
