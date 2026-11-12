@@ -112,6 +112,30 @@
       letter-spacing: 0;
     }
 
+    .game-header__exit {
+      width: 210px;
+      height: 62px;
+      padding: 0 24px;
+      justify-content: center;
+      gap: 12px;
+      border: 2px solid #4dd5bc;
+      border-radius: 0;
+      background: rgba(134, 233, 214, 0.14);
+      color: white;
+      box-shadow: none;
+
+      &:hover {
+        border-width: 3px;
+        background: rgba(134, 233, 214, 0.26);
+      }
+
+      &::before {
+        width: 24px;
+        height: 24px;
+        background-image: url("../../assets/icons/exit_white.svg");
+      }
+    }
+
     .game-header {
       &__scores {
         // Figma PDF and preview SVG disagree on the original surface fill.
@@ -158,9 +182,6 @@
         &::before {
           content: none;
         }
-      }
-      &__exit::before {
-        background-image: url("../../assets/icons/exit_white.svg");
       }
     }
   }

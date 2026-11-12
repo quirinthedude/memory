@@ -1,3 +1,5 @@
+@use "../abstracts/tokens" as t;
+
 .game {
   // Standard-Theme: Code Vibes
   --theme-bg: #303131;
@@ -11,6 +13,8 @@
     --theme-card-front: #ffffff;
     --theme-text: #ffffff;
   }
-
-  // Weitere Themes folgen
+  &[data-theme="code-vibes"] {
+    background: t.$home-bg;
+    min-height: 100svh;
+  }
 }
