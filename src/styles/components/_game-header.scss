@@ -30,8 +30,8 @@
     &::before {
       content: "";
       display: inline-block;
-      width: 0.75rem;
-      height: 1rem;
+      width: 1.75rem;
+      height: 1.5rem;
       flex-shrink: 0;
 
       background-position: center;
@@ -71,16 +71,16 @@
     align-items: center;
     justify-content: center;
 
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     padding: 0;
-    border-radius: 0.375rem;
+    border-radius: 0.275rem;
     background: t.$player-blue;
 
     &::before {
       content: "";
-      width: 0.75rem;
-      height: 1rem;
+      width: 1.25rem;
+      height: 1.5rem;
       background: url(../../assets/icons/current_player.svg) center / contain
         no-repeat;
     }
@@ -95,6 +95,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    font: inherit;
 
     justify-self: end;
     cursor: pointer;
@@ -120,15 +121,29 @@
     line-height: 1;
 
     .game-header {
-      &__exit::before {
-        background-image: url("../../assets/icons/exit_red.svg");
+      &__exit {
+        border: 2px solid #e71c4f;
+        border-radius: 0.5rem;
+        background: #555e78;
+        color: white;
+        padding: 0.75rem 1rem;
+
+        &:hover {
+          box-shadow: 0 0 0 1px #e71c4f;
+          &::before {
+            background-image: url("../../assets/icons/exit_red.svg");
+          }
+        }
+        &::before {
+          background-image: url("../../assets/icons/exit_white.svg");
+        }
       }
       &__score {
-        font-size: 1.875rem; // 30px
+        font-size: 1.675rem;
       }
 
       &__current {
-        font-size: 2rem; // 32px
+        font-size: 1.8rem;
         letter-spacing: 0.07em;
       }
 
