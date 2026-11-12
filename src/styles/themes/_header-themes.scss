@@ -128,10 +128,45 @@
       font-size: 16px;
       line-height: 1;
       letter-spacing: 0;
-    }
+      position: relative;
+      width: 176px;
+      height: 49px;
+      padding: 0 18px;
+      justify-content: center;
+      gap: 12px;
+      border: 0;
+      border-radius: 14px;
+      background: #fff9f2;
+      color: #f3832d;
+      box-shadow: none;
 
-    .game-header__exit::before {
-      background-image: url("../../assets/icons/exit_orange.svg");
+      &:hover {
+        background: #f3832d;
+        color: white;
+
+        &::after {
+          opacity: 0;
+        }
+      }
+
+      &::before {
+        width: 16px;
+        height: 16px;
+        background: currentColor;
+        mask: url("../../assets/icons/exit_orange.svg") center / contain
+          no-repeat;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #f3832d;
+        mask: url("../../assets/images/food-exit-border.svg") center / 100% 100%
+          no-repeat;
+        pointer-events: none;
+        transition: opacity 120ms ease;
+      }
     }
   }
 
