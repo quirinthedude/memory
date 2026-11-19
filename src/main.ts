@@ -11,9 +11,13 @@ import "./styles/main.scss";
 
 import { initSettings, type GameSettings } from "./ui/settings";
 import { GameHeader } from "./ui/game-header";
-import { initializeGame } from "./game/game";
+import { disposeGame, initializeGame } from "./game/game";
+import { ResultScreen } from "./ui/result-screen";
 
-type View = "home" | "settings" | "game";
+type View = "home" | "settings" | "game" | "result";
+
+const resultContainer = document.querySelector<HTMLElement>("#result");
+const resultScreen = resultContainer ? new ResultScreen(resultContainer) : null;
 
 function showView(view: View): void {
   const sections = document.querySelectorAll<HTMLElement>("main > section");
@@ -27,7 +31,15 @@ document
   .querySelector("#start-game")
   ?.addEventListener("click", () => showView("settings"));
 
+function returnHome(): void {
+  disposeGame();
+  resultScreen?.dispose();
+  showView("home");
+  document.querySelector<HTMLButtonElement>("#start-game")?.focus();
+}
+
 function startGame(settings: GameSettings): void {
+  resultScreen?.dispose();
   const game = document.querySelector<HTMLElement>("#game");
   if (!game) return;
 
@@ -36,15 +48,20 @@ function startGame(settings: GameSettings): void {
 
   let header: GameHeader | null = null;
 
-  const state = initializeGame(settings, (state) => {
-    header?.update(state);
-  });
+  const state = initializeGame(
+    settings,
+    (state) => header?.update(state),
+    (state) => {
+      showView("result");
+      resultScreen?.show(state, settings, returnHome);
+    },
+  );
   if (!state) return;
 
   game.dataset.theme = settings.theme;
 
   //initialize header
-  header = new GameHeader(container, settings.theme, () => showView("home"));
+  header = new GameHeader(container, settings.theme, returnHome);
 
   // beginning oft state
   header.update(state);

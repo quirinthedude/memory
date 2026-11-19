@@ -1,0 +1,111 @@
+.result {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 3rem 1.5rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  &__content {
+    position: relative;
+    width: min(100%, 72rem);
+    min-height: min(42rem, calc(100svh - 6rem));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__title,
+  &__lead,
+  &__score-label {
+    margin: 0;
+  }
+
+  &__title:focus {
+    outline: none;
+  }
+
+  &__score-group {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: center;
+  }
+
+  &__scores {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  &__score {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+
+    &::before {
+      content: "";
+      width: 1rem;
+      height: 0.8rem;
+      background: currentColor;
+      mask: url("../../assets/icons/blue_current.svg") center / contain no-repeat;
+    }
+  }
+
+  &__decoration {
+    display: block;
+    flex: none;
+    width: auto;
+    max-width: min(80vw, 23rem);
+    height: clamp(10rem, 27vh, 19rem);
+    object-fit: contain;
+  }
+
+  &__confetti {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100vw, 77rem);
+    max-height: 28vh;
+    transform: translateX(-50%);
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  &[data-phase="game-over"] &__content {
+    gap: clamp(2rem, 10vh, 6.25rem);
+  }
+
+  &[data-phase="outcome"] &__content {
+    gap: clamp(0.75rem, 2vh, 1.5rem);
+  }
+
+  &[data-phase="outcome"] &__back {
+    margin-top: clamp(0.5rem, 2vh, 1.5rem);
+  }
+
+  &__back {
+    cursor: pointer;
+    font: inherit;
+  }
+
+  @media (max-width: 700px) {
+    padding: 2rem 1rem;
+
+    &__content {
+      min-height: min(35rem, calc(100svh - 4rem));
+    }
+
+    &__decoration {
+      max-width: 70vw;
+      height: clamp(8rem, 25vh, 15rem);
+    }
+
+    &__confetti {
+      max-height: 19vh;
+    }
+  }
+}

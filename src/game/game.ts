@@ -5,13 +5,26 @@ import { renderBoard } from "./board";
 import { getThemeConfig } from "../data/theme-config";
 
 let gameState: GameState | null = null;
+let activeBoard: HTMLElement | null = null;
+let pendingTimer: number | null = null;
+
+export function disposeGame(): void {
+  if (pendingTimer !== null) window.clearTimeout(pendingTimer);
+  pendingTimer = null;
+  if (activeBoard) activeBoard.onclick = null;
+  activeBoard = null;
+  gameState = null;
+}
 
 export function initializeGame(
   settings: GameSettings,
   onStateChange: (state: GameState) => void,
+  onComplete: (state: GameState) => void,
 ): GameState | null {
+  disposeGame();
   const board = document.querySelector<HTMLElement>("#game-board");
   if (!board) return null;
+  activeBoard = board;
 
   const config = BOARD_SIZES[settings.boardSize];
   const themeConfig = getThemeConfig(settings.theme);
@@ -75,12 +88,22 @@ export function initializeGame(
       onStateChange(state);
 
       state.flippedCards = [];
-      state.isLocked = false;
+      if (state.cards.every((card) => card.isMatched)) {
+        // Keep the final pair visible until its existing 0.5s flip finishes.
+        pendingTimer = window.setTimeout(() => {
+          pendingTimer = null;
+          if (gameState === state) onComplete(state);
+        }, 500);
+      } else {
+        state.isLocked = false;
+      }
       return;
     }
 
     //different pair -> back to game
-    setTimeout(() => {
+    pendingTimer = window.setTimeout(() => {
+      pendingTimer = null;
+      if (gameState !== state) return;
       firstCard.isFlipped = false;
       secondCard.isFlipped = false;
 
@@ -106,13 +129,4 @@ export function initializeGame(
   };
 
   return gameState;
-}
-
-export function renderGameBoard(settings: GameSettings): void {
-  const board = document.querySelector<HTMLElement>("#game-board");
-
-  if (!board) return;
-
-  //   const cardCount = sizeMap[settings.boardSize];
-  const config = BOARD_SIZES[settings.boardSize];
 }
