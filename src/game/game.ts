@@ -56,12 +56,7 @@ export function initializeGame(
 
     if (cannotFlipCard(memoryCard, state)) return;
 
-    //flip selected card
-    memoryCard.isFlipped = true;
-    card.classList.add("is-flipped");
-    card.setAttribute("aria-label", `Card ${index + 1}, face up`);
-
-    state.flippedCards.push(index);
+    flipCard(memoryCard, card, state, index);
 
     //Wait for second card
     if (state.flippedCards.length < 2) return;
@@ -135,8 +130,7 @@ function findCardButton(target: EventTarget | null): HTMLButtonElement | null {
 }
 
 /**
- *
- * @param memoryCard Checks if a card interaction should be ignored
+ *  Checks if a card interaction should be ignored
  *
  * @param memoryCard - selected memory card if so
  * @param state  - current game state
@@ -152,4 +146,24 @@ function cannotFlipCard(
     memoryCard.isFlipped ||
     memoryCard.isMatched
   );
+}
+
+/**
+ * Flips the card
+ *
+ * @param memoryCard - selected memory-card
+ * @param card - corresponding HTML button
+ * @param state - current game state
+ * @param index - card's position
+ */
+function flipCard(
+  memoryCard: MemoryCard,
+  card: HTMLButtonElement,
+  state: GameState,
+  index: number,
+): void {
+  memoryCard.isFlipped = true;
+  card.classList.add("is-flipped");
+  card.setAttribute("aria-label", `Card ${index + 1}, face up`);
+  state.flippedCards.push(index);
 }
