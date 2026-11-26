@@ -63,6 +63,68 @@ export function initializeGame(
 
     state.isLocked = true;
 
+    evaluateTurn(state, board, settings, onStateChange, onComplete);
+  };
+
+  /**
+   * Finds the memory-card button associated with the click target.
+   * @param target  - original event target
+   * @returns closest matching card button, or null if not found
+   */
+  function findCardButton(
+    target: EventTarget | null,
+  ): HTMLButtonElement | null {
+    if (!(target instanceof Element)) return null;
+
+    return target.closest<HTMLButtonElement>(".game-board__card");
+  }
+
+  /**
+   *  Checks if a card interaction should be ignored
+   *
+   * @param memoryCard - selected memory card if so
+   * @param state  - current game state
+   * @returns True if the card cannot be flipped
+   */
+  function cannotFlipCard(
+    memoryCard: MemoryCard | undefined,
+    state: GameState,
+  ): boolean {
+    return (
+      !memoryCard ||
+      state.isLocked ||
+      memoryCard.isFlipped ||
+      memoryCard.isMatched
+    );
+  }
+
+  /**
+   * Flips the card
+   *
+   * @param memoryCard - selected memory-card
+   * @param card - corresponding HTML button
+   * @param state - current game state
+   * @param index - card's position
+   */
+  function flipCard(
+    memoryCard: MemoryCard,
+    card: HTMLButtonElement,
+    state: GameState,
+    index: number,
+  ): void {
+    memoryCard.isFlipped = true;
+    card.classList.add("is-flipped");
+    card.setAttribute("aria-label", `Card ${index + 1}, face up`);
+    state.flippedCards.push(index);
+  }
+
+  function evaluateTurn(
+    state: GameState,
+    board: HTMLElement,
+    settings: GameSettings,
+    onStateChange: (state: GameState) => void,
+    onComplete: (state: GameState) => void,
+  ): void {
     const [firstIndex, secondIndex] = state.flippedCards;
     const firstCard = state.cards[firstIndex];
     const secondCard = state.cards[secondIndex];
@@ -86,7 +148,6 @@ export function initializeGame(
       }
       return;
     }
-
     //different pair -> back to game
     pendingTimer = window.setTimeout(() => {
       pendingTimer = null;
@@ -113,57 +174,7 @@ export function initializeGame(
 
       state.isLocked = false;
     }, 1000);
-  };
+  }
 
   return gameState;
-}
-
-/**
- * Finds the memory-card button associated with the click target.
- * @param target  - original event target
- * @returns closest matching card button, or null if not found
- */
-function findCardButton(target: EventTarget | null): HTMLButtonElement | null {
-  if (!(target instanceof Element)) return null;
-
-  return target.closest<HTMLButtonElement>(".game-board__card");
-}
-
-/**
- *  Checks if a card interaction should be ignored
- *
- * @param memoryCard - selected memory card if so
- * @param state  - current game state
- * @returns True if the card cannot be flipped
- */
-function cannotFlipCard(
-  memoryCard: MemoryCard | undefined,
-  state: GameState,
-): boolean {
-  return (
-    !memoryCard ||
-    state.isLocked ||
-    memoryCard.isFlipped ||
-    memoryCard.isMatched
-  );
-}
-
-/**
- * Flips the card
- *
- * @param memoryCard - selected memory-card
- * @param card - corresponding HTML button
- * @param state - current game state
- * @param index - card's position
- */
-function flipCard(
-  memoryCard: MemoryCard,
-  card: HTMLButtonElement,
-  state: GameState,
-  index: number,
-): void {
-  memoryCard.isFlipped = true;
-  card.classList.add("is-flipped");
-  card.setAttribute("aria-label", `Card ${index + 1}, face up`);
-  state.flippedCards.push(index);
 }
