@@ -1,5 +1,5 @@
 import type { GameSettings } from "../ui/settings";
-import { BOARD_SIZES, type GameState } from "./types";
+import { BOARD_SIZES, MemoryCard, type GameState } from "./types";
 import { createShuffleDeck, mapDeckToCards } from "./deck";
 import { renderBoard } from "./board";
 import { getThemeConfig } from "../data/theme-config";
@@ -47,22 +47,14 @@ export function initializeGame(
 
   board.onclick = (event) => {
     const target = event.target;
-    if (!(target instanceof Element)) return;
 
-    const card = target.closest<HTMLButtonElement>(".game-board__card");
+    const card = findCardButton(target);
     if (!card || !board.contains(card)) return;
 
     const index = Number(card.dataset.index);
     const memoryCard = state.cards[index];
 
-    //prevent invalid interactions
-    if (
-      !memoryCard ||
-      state.isLocked ||
-      memoryCard.isFlipped ||
-      memoryCard.isMatched
-    )
-      return;
+    if (cannotFlipCard(memoryCard, state)) return;
 
     //flip selected card
     memoryCard.isFlipped = true;
@@ -129,4 +121,35 @@ export function initializeGame(
   };
 
   return gameState;
+}
+
+/**
+ * Finds the memory-card button associated with the click target.
+ * @param target  - original event target
+ * @returns closest matching card button, or null if not found
+ */
+function findCardButton(target: EventTarget | null): HTMLButtonElement | null {
+  if (!(target instanceof Element)) return null;
+
+  return target.closest<HTMLButtonElement>(".game-board__card");
+}
+
+/**
+ *
+ * @param memoryCard Checks if a card interaction should be ignored
+ *
+ * @param memoryCard - selected memory card if so
+ * @param state  - current game state
+ * @returns True if the card cannot be flipped
+ */
+function cannotFlipCard(
+  memoryCard: MemoryCard | undefined,
+  state: GameState,
+): boolean {
+  return (
+    !memoryCard ||
+    state.isLocked ||
+    memoryCard.isFlipped ||
+    memoryCard.isMatched
+  );
 }
