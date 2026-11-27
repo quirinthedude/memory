@@ -131,22 +131,7 @@ function evaluateTurn(
   const secondCard = state.cards[secondIndex];
 
   if (firstCard.pairId === secondCard.pairId) {
-    firstCard.isMatched = true;
-    secondCard.isMatched = true;
-
-    state.scores[state.currentPlayer]++;
-    onStateChange(state);
-
-    state.flippedCards = [];
-    if (state.cards.every((card) => card.isMatched)) {
-      // Keep the final pair visible until its existing 0.5s flip finishes.
-      pendingTimer = window.setTimeout(() => {
-        pendingTimer = null;
-        if (gameState === state) onComplete(state);
-      }, 500);
-    } else {
-      state.isLocked = false;
-    }
+    handleMatch(firstCard, secondCard, state, onStateChange, onComplete);
     return;
   }
   //different pair -> back to game
@@ -174,4 +159,29 @@ function evaluateTurn(
 
     state.isLocked = false;
   }, 1000);
+}
+
+function handleMatch(
+  firstCard: MemoryCard,
+  secondCard: MemoryCard,
+  state: GameState,
+  onStateChange: (state: GameState) => void,
+  onComplete: (state: GameState) => void,
+): void {
+  firstCard.isMatched = true;
+  secondCard.isMatched = true;
+
+  state.scores[state.currentPlayer]++;
+  onStateChange(state);
+
+  state.flippedCards = [];
+  if (state.cards.every((card) => card.isMatched)) {
+    // Keep the final pair visible until its existing 0.5s flip finishes.
+    pendingTimer = window.setTimeout(() => {
+      pendingTimer = null;
+      if (gameState === state) onComplete(state);
+    }, 500);
+  } else {
+    state.isLocked = false;
+  }
 }
