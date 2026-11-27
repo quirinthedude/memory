@@ -1,5 +1,6 @@
 import type { GameSettings } from "../ui/settings";
-import { BOARD_SIZES, MemoryCard, type GameState } from "./types";
+import { BOARD_SIZES } from "./types";
+import type { MemoryCard, GameState } from "./types";
 import { createShuffleDeck, mapDeckToCards } from "./deck";
 import { renderBoard } from "./board";
 import { getThemeConfig } from "../data/theme-config";
