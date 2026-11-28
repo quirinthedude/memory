@@ -1,6 +1,6 @@
 import type { GameSettings } from "../ui/settings";
 import { BOARD_SIZES } from "./types";
-import type { MemoryCard, GameState } from "./types";
+import type { MemoryCard, GameState, GameContext } from "./types";
 import { createShuffleDeck, mapDeckToCards } from "./deck";
 import { renderBoard } from "./board";
 import { getThemeConfig } from "../data/theme-config";
@@ -46,6 +46,14 @@ export function initializeGame(
 
   const state = gameState;
 
+  const context: GameContext = {
+    state,
+    board,
+    settings,
+    onStateChange,
+    onComplete,
+  };
+
   board.onclick = (event) => {
     const target = event.target;
 
@@ -64,7 +72,7 @@ export function initializeGame(
 
     state.isLocked = true;
 
-    evaluateTurn(state, board, settings, onStateChange, onComplete);
+    evaluateTurn(context);
   };
   return gameState;
 }
@@ -119,41 +127,26 @@ function flipCard(
   state.flippedCards.push(index);
 }
 
-function evaluateTurn(
-  state: GameState,
-  board: HTMLElement,
-  settings: GameSettings,
-  onStateChange: (state: GameState) => void,
-  onComplete: (state: GameState) => void,
-): void {
+function evaluateTurn(context: GameContext): void {
+  const { state, board, settings, onStateChange } = context;
   const [firstIndex, secondIndex] = state.flippedCards;
   const firstCard = state.cards[firstIndex];
   const secondCard = state.cards[secondIndex];
 
   if (firstCard.pairId === secondCard.pairId) {
-    handleMatch(firstCard, secondCard, state, onStateChange, onComplete);
+    handleMatch(firstCard, secondCard, context);
     return;
   }
   //different pair -> back to game
-  handleMismatch(
-    firstCard,
-    secondCard,
-    state,
-    onStateChange,
-    settings,
-    firstIndex,
-    secondIndex,
-    board,
-  );
+  handleMismatch(firstCard, secondCard, firstIndex, secondIndex, context);
 }
 
 function handleMatch(
   firstCard: MemoryCard,
   secondCard: MemoryCard,
-  state: GameState,
-  onStateChange: (state: GameState) => void,
-  onComplete: (state: GameState) => void,
+  context: GameContext,
 ): void {
+  const { state, onStateChange, onComplete } = context;
   firstCard.isMatched = true;
   secondCard.isMatched = true;
 
@@ -175,13 +168,11 @@ function handleMatch(
 function handleMismatch(
   firstCard: MemoryCard,
   secondCard: MemoryCard,
-  state: GameState,
-  onStateChange: (state: GameState) => void,
-  settings: GameSettings,
   firstIndex: number,
   secondIndex: number,
-  board: HTMLElement,
+  context: GameContext,
 ): void {
+  const { state, board, settings, onStateChange } = context;
   pendingTimer = window.setTimeout(() => {
     pendingTimer = null;
     if (gameState !== state) return;

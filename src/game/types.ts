@@ -1,3 +1,5 @@
+import type { GameSettings } from "../ui/settings";
+
 export type BoardSize = "small" | "medium" | "large";
 
 export interface BoardConfig {
@@ -27,4 +29,12 @@ export interface GameState {
   scores: Record<"blue" | "orange", number>;
   flippedCards: number[];
   isLocked: boolean;
+}
+
+export interface GameContext {
+  state: GameState;
+  board: HTMLElement;
+  settings: GameSettings;
+  onStateChange: (state: GameState) => void;
+  onComplete: (state: GameState) => void;
 }
