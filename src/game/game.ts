@@ -135,30 +135,16 @@ function evaluateTurn(
     return;
   }
   //different pair -> back to game
-  pendingTimer = window.setTimeout(() => {
-    pendingTimer = null;
-    if (gameState !== state) return;
-    firstCard.isFlipped = false;
-    secondCard.isFlipped = false;
-
-    for (const cardIndex of [firstIndex, secondIndex]) {
-      const element = board.querySelector<HTMLButtonElement>(
-        `.game-board__card[data-index="${cardIndex}"]`,
-      );
-      element?.classList.remove("is-flipped");
-      element?.setAttribute("aria-label", `Card ${cardIndex + 1}, face down`);
-    }
-
-    state.flippedCards = [];
-
-    if (settings.players === 2) {
-      state.currentPlayer = state.currentPlayer === "blue" ? "orange" : "blue";
-
-      onStateChange(state);
-    }
-
-    state.isLocked = false;
-  }, 1000);
+  handleMismatch(
+    firstCard,
+    secondCard,
+    state,
+    onStateChange,
+    settings,
+    firstIndex,
+    secondIndex,
+    board,
+  );
 }
 
 function handleMatch(
@@ -184,4 +170,40 @@ function handleMatch(
   } else {
     state.isLocked = false;
   }
+}
+
+function handleMismatch(
+  firstCard: MemoryCard,
+  secondCard: MemoryCard,
+  state: GameState,
+  onStateChange: (state: GameState) => void,
+  settings: GameSettings,
+  firstIndex: number,
+  secondIndex: number,
+  board: HTMLElement,
+): void {
+  pendingTimer = window.setTimeout(() => {
+    pendingTimer = null;
+    if (gameState !== state) return;
+    firstCard.isFlipped = false;
+    secondCard.isFlipped = false;
+
+    for (const cardIndex of [firstIndex, secondIndex]) {
+      const element = board.querySelector<HTMLButtonElement>(
+        `.game-board__card[data-index="${cardIndex}"]`,
+      );
+      element?.classList.remove("is-flipped");
+      element?.setAttribute("aria-label", `Card ${cardIndex + 1}, face down`);
+    }
+
+    state.flippedCards = [];
+
+    if (settings.players === 2) {
+      state.currentPlayer = state.currentPlayer === "blue" ? "orange" : "blue";
+
+      onStateChange(state);
+    }
+
+    state.isLocked = false;
+  }, 1000);
 }
